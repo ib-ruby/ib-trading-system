@@ -3,23 +3,23 @@
 During the 1980th, mechanical trading systems were very popular.
 For the first time, computerized trading of stocks and commodities was possible. 
 
-Due to the high intrinsic entropy of time series of financial assets, most efforts failed.
+Due to the high intrinsic entropy of time series data of financial assets, most efforts failed.
 
 Today mechanical trading systems are mostly used for educational purpose. 
 
 
 In 2020 we witnessed a comeback of private traders to the US-market. This leads to the question,
 whether common price-pattern of the past re-emerged as well.  
-If this hypothesis is valid, old school **a**utomated **t**rading **s**ystems could even today
+If this hypothesis is valid, old school **A**utomated **T**rading **S**ystems could even today
 offer a decent support for trading decisions.
 
 
-# IB-Trading-System
+#
+>The easiest way to install the `IB-Ruby`-environment is to use [IB-Container](https:/github.com/ib-ruby/ib-container). Clone this repository there, run `bundle install` and  `bundle update` and you are ready to go.
+ IB-Trading-System
 
 The `IB-Trading-System` regularly uses the `TWS-API` as data source to compile trading signals. 
 No further database is required. 
-
->The easiest way to install the `IB-Ruby`-environment is to use [IB-Container](https:/github.com/ib-ruby/ib-container). Clone this repository there, run `bundle install` and  `bundle update` and you are ready to go.
 
 
 ```ruby
@@ -36,10 +36,10 @@ to the slope of the _Pivot-Points_ of the analysed time-series.
 ### How does it work?
 `IB-Trading-System` is integrated in `IB-Ruby`. It redefines and extends `IB::Model`-Classes.
 
-* `lib/ib/bar.rb` reopens `IB::Bar` and defines  `price-singal`  which is y
+* `lib/ib/bar.rb` reopens `IB::Bar` and defines  `price-signal`, which is used for backtesting. 
 * `lib/ib/contract.rb`  reopens `IB::Contract` and defines a method `request_historical_data`. 
 
-The parameter `back` determines the _backtesting interval_. `interval`, which is one of 
+It takes tow parameter, `back`, the amount of data requested from the tws and `interval`, the timeframe of the trading-system, which is one of 
 ```ruby
 > IB::BAR_SIZES
  "1 min", "5 mins", "15 mins", "30 mins", "1 hour", "1 day"
@@ -48,7 +48,7 @@ The parameter `back` determines the _backtesting interval_. `interval`, which is
 
 Prior to the processing of life-data, recent historical data **of the same timeframe** 
 are analysed and trading signals are compiled. 
-`contract.request_historical_data`  just fires the request. The `TWS`-response is processed by `@subscribers`
+`Contract.request_historical_data`  just fires the request. The `TWS`-response is processed by `@subscribers`
 in `TradingSystem::Base`. 
 
 ```ruby
@@ -78,11 +78,12 @@ class Surfing < Base
   def analyse_data data
     signal = -(@contract.bars.last.pivot[:pp] - data.pivot[:pp]) <=> 0 
     @position ||= -signal
-    action = signal == 1 ? :buy : :sell  if @position != signal
-    IB::Gateway.current.clients.first place contract: @contract, 
+    if @position != signal
+      action = signal == 1 ? :buy : :sell  
+      IB::Gateway.current.clients.first place contract: @contract, 
                                             order: Limit.order( action: action, size: @default_size, price: data.close ) 
-
-   @position = signal
+      @position = signal
+    end
 end
 
 ```
