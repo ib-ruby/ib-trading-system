@@ -15,7 +15,7 @@ offer a decent support for trading decisions.
 
 
 #
->The easiest way to install the `IB-Ruby`-environment is to use an [IB-Container](https:/github.com/ib-ruby/ib-container). Clone this repository there, run `bundle install` and  `bundle update` and you are ready to go.
+>The easiest way to install the `IB-Ruby`-environment is to use an [IB-Container](https://github.com/ib-ruby/ib-container). Clone this repository there, run `bundle install` and  `bundle update` and you are ready to go.
 
 # IB-Trading-System
 
