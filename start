@@ -1,0 +1,32 @@
+#! /bin/bash
+SESSION=slope-surfing
+# tmux mit 256 Farbunterstützung, Loginshell und UTF8-Support verwenden
+tmux='tmux -2 -l -u' #
+current=`pwd`
+# if the session is already running, just attach to it.
+$tmux has-session -t $SESSION
+if [ $? -eq 0 ]; then
+	echo "Session $SESSION already exists. Attaching."
+	sleep 1
+	$tmux attach -t $SESSION
+	exit 0;
+fi
+
+$tmux new-session -d -s $SESSION
+$tmux new-window  -t $SESSION:0  -c "$current"
+
+$tmux split-window -d -t $SESSION:0 -v -p 25
+#$tmux select-layout main-horizontal
+#$tmux split-window -d  -p 10 -t $SESSION:0 -v
+#
+$tmux send-keys -t 1 "cd ${current}/bin" enter  C-l
+$tmux send-keys -t 1 './ats t'  enter C-l
+
+#tmux resize-pane -t 1 -U 10  enter
+#
+$tmux send-keys -t 0 "cd ${current}/log" enter  C-l
+$tmux send-keys -t 0 'multitail -M 0 -f points -f ib-trading.log'  enter C-l
+#
+$tmux select-pane -t $SESSION:0
+
+$tmux	attach -t $SESSION

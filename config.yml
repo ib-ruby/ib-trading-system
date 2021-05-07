@@ -1,0 +1,28 @@
+---
+# TWS-specific settngs
+# Port of Gateway and TWS
+#  4001/7696  for active accounts
+#  4002/7697 for demo accounts
+:gateway:  4002
+:tws: 7496
+# unique client id  ( to ensure, that only one instance is connected )
+:client_id: 2000
+# security feature: only trade on the specified accounts
+:account: DUXXXXX
+# active tws-instance, gui()tws) or gateway
+:product: :tws # gateway
+# define contracts and specific parameters
+# ensure that market data permissions are set
+:instance:
+  :dax:
+    :contract: Symbols::Futures.mini_dax
+    :slippage: 1
+  :russell:
+    :contract: Symbols::Futures.micro_russell
+    :slippage: 1
+#  :mini-russel:
+#    :contract: Symbols::Futures.hsi
+#    :slippage: 4
+
+
+
