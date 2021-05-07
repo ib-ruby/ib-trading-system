@@ -92,6 +92,9 @@ end
 `TradingSystem::Surfing` stores compiled trade-signals in `@raw_data`, which is publicly accessible, among others 
 ```ruby
 > ats =  TradingSystem::Surfing.new contract: Symbols::Futures.mini_dax
+> ats.run
+> (...)
+> ats.stop
 > ats.contract.to_human               => "<Future: DAX 202106 EUR>" 
 > ats.raw_data.first
   => #<struct TradingSystem::RawData time=2021-04-23 02:00:00 +0000, 
