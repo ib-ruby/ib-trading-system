@@ -119,7 +119,7 @@ The data are stored in an array of structs, acting as intelligent hash by defaul
 `@raw_data` is a common Array. For further analysis, ruby offers [numo-narray](https://github.com/ruby-numo/numo-narray) and for complex tasks, a delegation to R. 
 
 
-#CONTRIBUTING
+## CONTRIBUTING
 
 If you want to contribute to IB-Trading-System development:
 
