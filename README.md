@@ -115,8 +115,8 @@ end
 238, 238, 234, 234, 234, 234, 234] 
 > 
 ```
-The data are stored in a array of structs, witch acts as intelligent hash by default, but is easily 
-customized. `@raw_data` is a common Array. For further analysis, ruby offers [numo-narray](https://github.com/ruby-numo/numo-narray) and for complex tasks, a delegation to R. 
+The data are stored in an array of structs, acting as intelligent hash by default. 
+`@raw_data` is a common Array. For further analysis, ruby offers [numo-narray](https://github.com/ruby-numo/numo-narray) and for complex tasks, a delegation to R. 
 
 
 #CONTRIBUTING
