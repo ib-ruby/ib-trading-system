@@ -5,18 +5,7 @@ module TradingSystem
   RawData =  Struct.new :time, :signal, :price, :prev, :actual, :result
 
   class Base
-    # implements a very simple variant of a mechanical trend surving trading system
-
-#    Time=0  ..  Market Open
-#    Time=1  ... Pull previous hour historical data...=> Obtain Pivot Point & Slope.
-#
-#    If slope (of Pivot-Points) is positive then BUY.
-#    If slope                   is negative then SELL
-#
-#    repeat every hour
-
     include Support::Logging
-
     attr_reader :contract
 
     def initialize contract:, default_size: 1, **params
